@@ -1,2 +1,15 @@
-<h1>Patches#new</h1>
-<p>Find me in app/views/patches/new.html.erb</p>
+<%= form_for @user do |f| %>
+
+    <%= f.label :email%>
+    <%=f.email_field :email%>
+
+    <%= f.label :password%>
+    <%=f.password_field :password %>
+
+    <%= f.label :password_confirmation, "Confirm"%>
+    <%=f.password_field :password_confirmation%>
+
+    <%= f.submit "Register" %>
+<% end%>
+
+<%=link_to "Home", patches_path%>
