@@ -9,11 +9,27 @@ Rails.application.routes.draw do
 
   get 'patch/patch'
 
+  #route to users index
+  # root 'users#index', as: :users
+  #new user sign up form
+  get 'users/index', to: 'users#index', as: :users
+  get 'users/new', to: 'users#new', as: :new_user
+  
+  post '/', to: 'users#create'
+
+  #to display the form
+  get 'sessions/new', to: 'sessions#new', as: :new_session
+
+  #create a new session
+  post 'sessions/new', to: 'sessions#create', as: :create_session
+
+  get 'sessions/destroy', to: 'sessions#destroy', as: :destroy_session
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'patches#index'
+  root 'patches#index', as: :patches
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
