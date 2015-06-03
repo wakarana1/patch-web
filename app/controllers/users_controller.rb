@@ -7,13 +7,15 @@ class UsersController < ApplicationController
   end
 
 	def create
-		if User.create(user_params)
+		user = User.create(user_params)
+		if user.valid?
 			#redicret to signed in
 			flash[:success] = 'you are registered'
-			redirect_to users_path
+			log_in(user)
+			redirect_to patches_path
 		else
 			flash[:error] = 'registration has failed'
-			redirect_to new_session_path
+			redirect_to new_user_path
 		end
 	end
 

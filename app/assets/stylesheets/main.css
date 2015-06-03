@@ -1,6 +1,3 @@
-.success {
-	background-color: darkseagreen;
-}
-.error {
-	background-color: rosybrown;
+.form-control {
+	width: 600px;
 }

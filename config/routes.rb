@@ -1,29 +1,22 @@
 Rails.application.routes.draw do
-  get 'patches/index'
-
-  get 'patches/show'
-
-  get 'patches/new'
-
-  get 'patches/edit'
-
-  get 'patch/patch'
-
-  #route to users index
-  # root 'users#index', as: :users
+  
   #new user sign up form
   get 'users/index', to: 'users#index', as: :users
   get 'users/new', to: 'users#new', as: :new_user
-  
-  post '/', to: 'users#create'
+  post '/', to: 'users#create', as: :create_user
 
   #to display the form
   get 'sessions/new', to: 'sessions#new', as: :new_session
-
   #create a new session
   post 'sessions/new', to: 'sessions#create', as: :create_session
-
   get 'sessions/destroy', to: 'sessions#destroy', as: :destroy_session
+
+  get '/posts', to: 'posts#index', as: :posts
+  get '/posts/new', to: 'posts#new', as: :new_post
+  post'/posts', to: 'posts#create', as: :create_post
+  get 'posts/:id', to: 'posts#show', as: :post
+
+  post '/posts/:id/comments', to: 'comments#create', as: :create_comment
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

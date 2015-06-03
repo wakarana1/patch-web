@@ -3,12 +3,17 @@
       <% flash.each do |key,value|  %>
          <div class="<%= key %>" > <%= value %> </div>
       <% end %>
-
-      <%= f.label :email %>
-      <%= f.email_field :email %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-
-      <%= f.submit "Login" %>
+		<div class="container">
+			<div class="row">	
+				<%= f.label :email, class: "col-sm-2"%>
+				<%= f.email_field :email %>
+			</div>
+			<br>
+			<div class="row">
+				<%= f.label :password, class: "col-sm-2"%>
+				<%= f.password_field :password %>
+			</div>
+			<br>
+			<%= f.submit "Login", class: "btn btn-warning" %>
+		</div>
  <% end %>

@@ -1,0 +1,30 @@
+<h1>Posts.index</h1>
+
+<% if current_user%>
+	<%= link_to "Add New Post", new_post_path %>
+<% else %>
+<% end %>
+<hr>
+
+<% if @posts.count > 0 %>
+	<% @posts.each.do |post| %>
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3>concat post.title</h3>
+				<p>Posted by: concat post.user.name concat post.update_at</p>
+			</div>
+			<div class="panel-body">
+				<p>concat post.body</p>
+			</div>
+			<div class="panel-footer">
+				<%= if current_user
+						add = "/Add"
+					else
+						add = ""
+					end %>
+					<%= link_to "View#{add} Comments", post_path(id: post.id) %>
+			</div>
+		</div> <!-- panel -->
+	<% else %>
+		<h2>No Posts</h2>
+	<% end %>
