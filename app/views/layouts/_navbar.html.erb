@@ -1,43 +1,133 @@
 <nav class="navbar navbar-default">
-  <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <div class="navbar-brand"><%= link_to "Patches", patches_path %></div>
-    </div>
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+       <div class="navbar-header">
+           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+           </button>
+          <div class="navbar-brand"><%= link_to "Patches", patches_path %></div>
+       </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-      </ul>
-      <form class="navbar-form navbar-left" role="search">
-        <div class="input-group">
-          <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-          <input class="form-control" name="search" placeholder="Search Here" autocomplete="off" autofocus="autofocus" type="text">
-        </div><!-- input-group -->
-      </form>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Ask your question!</a></li>
-        <% if current_user %>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#">My Questions</a></li>
-              <li><a href="#">Preferences</a></li>
-              <li class="divider"></li>
-              <li><%=link_to "Logout", destroy_session_path %></li>
-        <%else%>
-          <li><%=link_to "Log In", new_session_path %></li>
-          <li><%= link_to "Register", new_user_path %></li>
-        <%end%>
-          </ul>
-        </li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div> <!-- container -->
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <form class="navbar-form navbar-left" role="search">
+            <div class="input-group">
+                <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                <input class="form-control" name="search" placeholder="Search Here" autocomplete="off" autofocus="autofocus" type="text">
+            </div><!-- input-group -->
+            </form>
+            <ul class="nav navbar-nav navbar-right">
+                <li><button type="button" class="btn btn-link" data-toggle="modal" data-target="#question">
+                    Ask a Question!
+                    </button></li>
+                <% if current_user %>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">My Questions</a></li>
+                        <li><a href="#">Preferences</a></li>
+                        <li class="divider"></li>
+                        <li><%=link_to "Logout", destroy_session_path %></li>
+                <% else%>
+                    <li><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">
+                    Log In
+                    </button></li>
+                    <li><%= link_to "Register", new_user_path %></li>
+                <% end%>
+                    </ul>
+                    </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div> <!-- container -->
 </nav>
+
+  <!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Log In</h4>
+        </div>
+            <div class="modal-body">
+                <!-- login form -->
+                <%= form_for User.new, url: create_session_path do |f| %>
+                    <% flash.each do |key,value|  %>
+                       <div class="<%= key %>" > <%= value %> </div>
+                    <% end %>
+                    <div class="container">
+                        <div class="row"> 
+                            <%= f.label :email, class: "col-sm-2"%>
+                            <%= f.email_field :email %>
+                        </div>
+                <br>
+                        <div class="row">
+                            <%= f.label :password, class: "col-sm-2"%>
+                            <%= f.password_field :password %>
+                        </div>
+                    </div>
+                    <%= f.submit "Login", class: "btn btn-warning" %>
+                <% end -%>
+            </div> <!-- modal body -->
+        </div> <!-- modal content -->
+    </div> <!-- modal dailog -->
+</div>
+
+<!-- Question Modal -->
+<div class="modal fade" id="question" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <% if current_user %>
+            <h4 class="modal-title" id="myModalLabel">What's your Question?</h4>
+            </div>
+            <div class="modal-body">
+                <!-- Question form -->
+                    <% flash.each do |key, value| %>
+                        <div class="<%= key %>"><%= value %></div>
+                    <% end -%>
+
+                    <%= form_for Post.new, url: create_post_path do |f| %>
+                        <div class="form-group">
+                            <%= f.text_field :title, class: "form-control" %>
+                            <%= f.text_area :body, class: "form-control" %>
+                        </div>
+
+                        <%= f.submit "Submit", class: "btn btn-warning" %>
+
+                    <% end -%>
+                    </div>
+                <% else %>
+            <h4 class="modal-title" id="myModalLabel">Please log in first!</h4>
+            </div>
+            <div class="modal-body">
+                    <%= form_for User.new, url: create_user_path do |f| %>
+                        <div class="container">
+                        <div class="row">
+                            <%= f.label :email, class: "col-sm-2"%>
+                            <%=f.email_field :email%>
+                        </div>
+                        <br>
+                        <div class="row">   
+                            <%= f.label :password, class: "col-sm-2"%>
+                            <%=f.password_field :password %>
+                        </div>  
+                            <br>
+                        <div class="row">
+                            <%= f.label :password_confirmation, "Confirm", class: "col-sm-2"%>
+                            <%=f.password_field :password_confirmation%>
+                        </div>  
+                        <br>
+                        <%= f.submit "Register", class: "btn btn-success" %>
+                        </div>
+                    <% end -%>
+                <% end -%>
+            </div> <!-- modal body -->
+        </div> <!-- modal content -->
+    </div> <!-- modal dailog -->
+</div>
