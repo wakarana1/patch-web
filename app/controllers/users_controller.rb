@@ -7,14 +7,11 @@ class UsersController < ApplicationController
   end
 
 	def create
-		user = User.create(user_params)
-		if user.valid?
-			#redicret to signed in
-			flash[:success] = 'you are registered'
-			log_in(user)
-			redirect_to patches_path
+        @user = User.new(user_params)
+        if @user.save
+          session[:user_id] = @user.id.to_s
+			redirect_to posts_path
 		else
-			flash[:error] = 'registration has failed'
 			redirect_to new_user_path
 		end
 	end
@@ -22,7 +19,7 @@ class UsersController < ApplicationController
 private
 
 	def user_params
-		params.require(:user).permit(:email,:password,:password_confirmation)
+		params.require(:user).permit(:name,:email,:password,:password_confirmation)
 	end
 
 end

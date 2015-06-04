@@ -17,14 +17,14 @@ Rails.application.routes.draw do
   get 'posts/:id', to: 'posts#show', as: :post
   get "posts/:id/edit" => "posts#edit", as: :edit_post
   patch "posts/:id" => "posts#update"
+  delete 'posts/:id', to: 'posts#destroy', as: :destroy
 
   post '/posts/:id/comments', to: 'comments#create', as: :create_comment
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'patches#index', as: :patches
+  root 'posts#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

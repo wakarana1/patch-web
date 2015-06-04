@@ -1,23 +1,36 @@
 <h1>Posts.show</h1>
 
-<%= link_to "Return", posts_path %>
+<%= link_to "Return", posts_path, class: "btn-sm btn-danger", style: "margin-left: 15px;" %>
 <hr>
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h3><%= @post.title %></h3>
-		<p>posted by <%= @post.user.name %> &nbsp;&nbsp;<small><%= @post.updated_at %></small></p>
-	</div>
-	<div class="panel-body">
-		<p><%= @post.body %></p>
-	</div>
-	<div class="panel-footer">
+<div class="row">
+	<div class="col-md-2"></div>
+		<div class="col-md-7">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3><%= @post.title %></h3>
+					<h4>posted by <%= @post.user.name %> &nbsp;&nbsp;<small><%= @post.updated_at %></small></h4>
+				</div>
+				<div class="panel-body">
+					<p><%= @post.body %></p>
+				</div>
+			</div>
+		</div>
+</div>
+<br>
+<div class="row">
+	<div class="col-md-1"></div>
+	<div class="col-md-5">
 		<h4>Comments</h4>
 		<% if @post.comments.count > 0 %>
 			<% @post.comments.each do |comment| %>
-			<div class="panel panel-default">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h4><%= comment.user.name %>
+					<br>
+					<small><%= comment.updated_at %></small></h4>
+				</div>
 				<div class="panel-body">
 					<p><%= comment.body %></p>
-					<h5><%= comment.user.name %>&nbsp;&nbsp;<small><%= comment.updated_at %></small></h5>
 				</div> <!-- panel body -->
 			</div> <!-- panel -->
 			<% end -%>
@@ -28,13 +41,16 @@
 </div>
 <hr>
 
-<% if current_user %>
-	<%= form_for @comment, url: create_comment_path do |f| %>
-		<%= hidden_field_tag :post_id, @post.id %>
-		<div class="form-group">
-			<%= f.label :body, "Comment" %>
-			<%= f.text_area :body, class: "form-control" %>
-		</div>
-		<%= f.submit "Add Comment", class: "btn btn-default" %>
-	<% end -%>
-<% end -%>
+<div class="col-md-2"></div>
+<div class="col-md-8">
+	<% if current_user %>
+	    <%= form_for @comment, url: create_comment_path do |f| %>
+	        <%= hidden_field_tag :post_id, @post.id %>
+	        <div class="form-group">
+	            <%= f.label :body, "Comment" %>
+	            <%= f.text_area :body, class: "form-control" %>
+	        </div>
+	        <%= f.submit "Add Comment", class: "btn btn-warning" %>
+	    <% end %>
+	<% end %>
+</div>

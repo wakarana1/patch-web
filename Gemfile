@@ -45,3 +45,8 @@ group :development, :test do
   gem 'rails_12factor', group: :production
 end
 
+group :development do
+	gem 'annotate'
+	gem 'better_errors'
+	gem 'binding_of_caller'
+end

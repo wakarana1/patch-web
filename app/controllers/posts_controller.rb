@@ -17,7 +17,8 @@ class PostsController < ApplicationController
 		end
 	end
 	def show
-		@post = Post.find(params[:id])		
+		@post = Post.find(params[:id])	
+		@comment = Comment.new	
 	end
 	def edit
   		@post = Post.find(params[:id])
@@ -30,6 +31,12 @@ class PostsController < ApplicationController
 	  else
 	    render :edit
 	  end
+	end
+
+	def destroy
+		@post = Post.find(params[:id])
+		@post.destroy
+		redirect_to posts_path
 	end
 private
     def post_params

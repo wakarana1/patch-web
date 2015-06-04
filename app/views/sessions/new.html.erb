@@ -1,0 +1,21 @@
+<h1 class="jumbotron">Please Log In</h1>
+
+<% flash.each do |key, value| %>
+    <div class="alert <%= key %>"><%= value %></div>
+<% end %>
+
+<%= form_for @user, url: create_session_path do |f| %>
+
+    <div class="form-group">
+    <%= f.label :name, "Username"%>
+    <%= f.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+    <%= f.label :password %>
+    <%= f.password_field :password, class: "form-control" %>
+    </div>
+
+    <%= f.submit "Log In", class: "btn btn-primary" %>
+
+<% end %>

@@ -4,21 +4,18 @@ class SessionsController < ApplicationController
   end
 
   def create
-  	user = User.where(email: user_params[:email]).first
+  	user = User.where(name: user_params[:name]).first
   	if user && user.authenticate(user_params[:password])
   		log_in(user)
-  		flash[:success] = 'Logged in!'
   		redirect_to posts_path
   	else
-  		flash[:error] = "Unable to log you in."
   		redirect_to new_session_path
   	end
   end
 
   def destroy
     session[:user_id] = nil
-    flash[:error] = 'Logged out successfully'
-    redirect_to patches_path
+    redirect_to posts_path
   end
 
 private

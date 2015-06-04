@@ -1,5 +1,7 @@
 <h1>Posts.index</h1>
 
+<div class="col-md-1"></div>
+<div class="col-md-8">
 <% if @posts.count > 0 %>
     <% @posts.each do |post| %>
         <div class="panel panel-default">
@@ -11,15 +13,27 @@
                 <p><%= post.body %></p>
             </div>
         </div>
-            <div class="panel-footer">
+            <div class="panel">
                 <% if current_user
                     add = "/Add"
                 else
                     add = ""
                 end %>
-                <%= link_to "View#{add} Comments", post_path(id: post.id) %>
+                <span class="col-md-6">
+                    <%= link_to "View#{add} Comments", post_path(id: post.id) %>
+                </span>
+                <span>
+                    <% if current_user %>
+                    <%= link_to "Delete this post!", destroy_path(id: post.id), method: :delete %>
+                    <% else %>
+                    <% end %>
+                </span>
             </div>
+            <br>
+
     <% end %>
 <% else %>
     <h2>No Posts Exist</h2>
 <% end %>
+</div>
+
