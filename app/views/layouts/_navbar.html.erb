@@ -14,34 +14,34 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <form class="navbar-form navbar-left" role="search">
-            <div class="input-group">
-                <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-                <input class="form-control" name="search" placeholder="Search Here" autocomplete="off" autofocus="autofocus" type="text">
-            </div><!-- input-group -->
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+                    <input id="search" class="form-control" name="search" placeholder="Search Here" autocomplete="off" autofocus="autofocus" type="text">
+                </div><!-- input-group -->
             </form>
             <ul class="nav navbar-nav navbar-right">
                 <li><button type="button" class="btn btn-link" data-toggle="modal" data-target="#question">
                     Ask a Question!
-                    </button></li>
+                </button></li>
                 <% if current_user %>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Menu <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">My Questions</a></li>
-                        <li><a href="#">Preferences</a></li>
-                        <li class="divider"></li>
-                        <li><%=link_to "Logout", destroy_session_path %></li>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">My Questions</a></li>
+                            <li><a href="#">Preferences</a></li>
+                            <li class="divider"></li>
+                            <li><%=link_to "Logout", destroy_session_path %></li>
                 <% else%>
-                    <li><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">
-                    Log In
-                    </button></li>
-                    <li><button type="button" class="btn btn-link" data-toggle="modal" data-target="#register">
-                    Register
-                    </button></li>
+                            <li><button type="button" class="btn btn-link" data-toggle="modal" data-target="#myModal">
+                                Log In
+                            </button></li>
+                            <li><button type="button" class="btn btn-link" data-toggle="modal" data-target="#register">
+                                Register
+                            </button></li>
                 <% end%>
-                    </ul>
+                        </ul>
                     </li>
-            </ul>
+                </ul>
         </div><!-- /.navbar-collapse -->
     </div> <!-- container -->
 </nav>
@@ -63,8 +63,8 @@
                     <% end %>
                     <div class="container">
                         <div class="row"> 
-                            <%= f.label :name, "Username", class: "col-sm-2"%>
-                            <%= f.text_field :name %>
+                            <%= f.label :email, class: "col-sm-2"%>
+                            <%= f.text_field :email %>
                         </div>
                 <br>
                         <div class="row">
@@ -122,7 +122,7 @@
         <div class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Log In</h4>
+        <h4 class="modal-title" id="myModalLabel">Register</h4>
         </div>
             <div class="modal-body">
                 <!-- login form -->

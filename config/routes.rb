@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   delete 'posts/:id', to: 'posts#destroy', as: :destroy
 
   post '/posts/:id/comments', to: 'comments#create', as: :create_comment
+  delete '/posts/:id/comments', to: 'comments#destroy', as: :destroy_comment
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

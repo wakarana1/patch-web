@@ -7,10 +7,15 @@ class CommentsController < ApplicationController
 			post.save
 			current_user.comments.push comment
 			current_user.save
-			redirect_to posts_path
+			redirect_to :back
 		else
 			alert("Comment was not posted")
 			redirect_to posts_path
 		end
+	end
+	def destroy
+		@comment = Comment.find(params[:id])
+		@comment.destroy
+		redirect_to :back
 	end
 end
