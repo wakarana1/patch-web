@@ -11,7 +11,7 @@
                 <h6>Posted by: <%= post.user.name %>&nbsp;&nbsp;<small><%= post.updated_at%></small></h6>
             </div>
             <div class="panel-body">
-                <p><%= post.body%></p>
+                <p><%= markdown post.body %></p>
             </div>
         </div>
             <div class="panel">

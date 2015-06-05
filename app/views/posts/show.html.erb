@@ -1,3 +1,4 @@
+require 'pygments'
 <h1>Posts.show</h1>
 
 <%= link_to "Return", posts_path, class: "btn-sm btn-danger", style: "margin-left: 15px;" %>
@@ -12,7 +13,7 @@
 					<h4>posted by <%= @post.user.name %> &nbsp;&nbsp;<small><%= @post.updated_at %></small></h4>
 				</div>
 				<div class="panel-body">
-					<p><%= markdown(@post.body) %></p>
+					<p><%= markdown @post.body %></p>
 				</div>
 			</div>
 		</div>
@@ -31,7 +32,7 @@
 					<small><%= comment.updated_at %></small></h4>
 				</div>
 				<div class="panel-body">
-					<p><%= markdown(comment.body) %></p>
+					<%= markdown comment.body %>
 				</div> <!-- panel body -->
 				<% if current_user.id == comment.user_id %>
 				<%= link_to "Delete this comment", destroy_comment_path(id: comment.id), method: :delete %>
