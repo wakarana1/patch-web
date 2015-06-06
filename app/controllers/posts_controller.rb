@@ -1,5 +1,3 @@
-require 'redcarpet'
-require 'pygments'
 class PostsController < ApplicationController
 	def index
 		if params[:query]
