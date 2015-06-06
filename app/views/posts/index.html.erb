@@ -1,37 +1,52 @@
 <br>
 <br>
-<div class="col-md-1"></div>
-<div class="col-md-8">
-<% if @posts.count > 0 %>
-    <% @posts.each do |post| %>
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3><%= post.title %></h3>
-                <p><%= post.user.id %></p>
-                <h6>Posted by: <%= post.user.name %>&nbsp;&nbsp;<small><%= post.updated_at%></small></h6>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-8">
+    <% if @posts.count > 0 %>
+        <% @posts.each do |post| %>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3><%= post.title %></h3>
+                    <h6>Posted by: <%= post.user.name %>&nbsp;&nbsp;<small><%= post.updated_at%></small></h6>
+                </div>
+                <div class="panel-body">
+                    <p><%= markdown post.body %></p>
+                </div>
             </div>
-            <div class="panel-body">
-                <p><%= markdown post.body %></p>
-            </div>
-        </div>
-            <div class="panel">
-                <% if current_user
-                    add = "/Add"
-                else
-                    add = ""
-                end %>
-                <span class="col-md-6">
-                    <%= link_to "View#{add} Comments", post_path(id: post.id) %>
-                </span>
-                <span>
-                    <%= link_to "Delete this post!", destroy_path(id: post.id), method: :delete %>
-                </span>
-            </div>
-            <br>
+                <div class="panel">
+                    <% if current_user
+                        add = "/Add"
+                    else
+                        add = ""
+                    end %>
+                    <span class="col-md-6">
+                        <%= link_to "View#{add} Comments", post_path(id: post.id) %>
+                    </span>
+                    <span>
+                        <% if current_user.id == post.user_id %>
+                            <%= link_to "Delete this post!", destroy_path(id: post.id), method: :delete %>
+                        <% end %>
+                    </span>
+                </div>
+                <br>
 
+        <% end %>
+    <% else %>
+        <h2>No Posts Exist</h2>
     <% end %>
-<% else %>
-    <h2>No Posts Exist</h2>
-<% end %>
+    </div>
+    <div class="col-md-3"></div>
 </div>
-
+<div class="row center-block">
+    <div class="col-md-1 col-md-offset-5">
+        <%= form_tag(posts_path, method: "get") do %>
+            <%= submit_tag "Prev", "class" => "btn btn-primary" %>
+    </div>
+    <div class="col-md-1 col-md-offset-1">
+            <%= submit_tag "Next", "class" => "btn btn-primary" %>
+        <% end %>
+    </div>
+</div>
+<br>
+<br>

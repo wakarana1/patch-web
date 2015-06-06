@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
 	def index
-		@posts = Post.all
+		@posts = Post.all.order("id DESC").all
 	end
 	def new
 		@post = Post.new		
@@ -18,7 +18,16 @@ class PostsController < ApplicationController
 	end
 	def show
 		@post = Post.find(params[:id])	
-		@comment = Comment.new	
+		@comment = Comment.new
+		if params[:commit] == "Next"
+	       post = Post.find(params[:id].to_i + 1)
+	       redirect_to post_path(post)
+	   elsif params[:commit] == "Prev"
+	       post = Post.find(params[:id].to_i - 1)
+	       redirect_to post_path(post)
+	   else
+	    	@post = Post.find(params[:id])
+	   end	
 	end
 	def edit
   		@post = Post.find(params[:id])
