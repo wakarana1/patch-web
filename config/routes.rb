@@ -13,11 +13,12 @@ Rails.application.routes.draw do
 
   get '/posts', to: 'posts#index', as: :posts
   get '/posts/new', to: 'posts#new', as: :new_post
-  post'/posts', to: 'posts#create', as: :create_post
-  get 'posts/:id', to: 'posts#show', as: :post
-  get "posts/:id/edit" => "posts#edit", as: :edit_post
-  patch "posts/:id" => "posts#update"
-  delete 'posts/:id', to: 'posts#destroy', as: :destroy
+  post '/posts', to: 'posts#create', as: :create_post
+  get '/posts/:id/edit', to: 'posts#edit', as: :edit_post
+  patch '/posts/:id/edit', to: 'posts#update', as: :update_posts
+  put '/posts/:id/edit', to: 'posts#update', as: :update_post
+  delete '/posts/:id', to: 'posts#destroy', as: :destroy
+  get '/posts/:id', to: 'posts#show', as: :post
 
   post '/posts/:id/comments', to: 'comments#create', as: :create_comment
   delete '/posts/:id/comments', to: 'comments#destroy', as: :destroy_comment

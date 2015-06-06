@@ -1,10 +1,24 @@
 class PostsController < ApplicationController
 	def index
-		@posts = Post.all.order("id DESC").all
+		if params[:query]
+			post_list = Post.all
+			@posts = []
+			post_list.each do |post|
+				if post.title.downcase.include? params[:query].downcase
+					@posts << post
+				elsif post.body.downcase.include? params[:query].downcase
+					@posts << post
+				end
+			end
+		else
+			@posts = Post.all.order("id DESC").all
+		end
 	end
+
 	def new
 		@post = Post.new		
 	end
+
 	def create
 		post = Post.new(post_params)
 		if post.valid?
@@ -16,6 +30,7 @@ class PostsController < ApplicationController
 			redirect_to new_post_path
 		end
 	end
+
 	def show
 		@post = Post.find(params[:id])	
 		@comment = Comment.new
@@ -25,20 +40,25 @@ class PostsController < ApplicationController
 	   elsif params[:commit] == "Prev"
 	       post = Post.find(params[:id].to_i - 1)
 	       redirect_to post_path(post)
-	   else
+	   elsif params[:commit] == "Go"
+        post = Post.find(params[:hero_id])
+        redirect_to post_path(post)
+	    else
 	    	@post = Post.find(params[:id])
-	   end	
+	    end
 	end
+
 	def edit
   		@post = Post.find(params[:id])
 	end
+
 	def update
 	  @post = Post.find(params[:id])
 
 	  if @post.update_attributes(params.require(:post).permit(:title,:body))
-	    redirect_to posts_path
+	    redirect_to post_path
 	  else
-	    render :edit
+	    redirect_to edit_post_path
 	  end
 	end
 

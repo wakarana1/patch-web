@@ -17,6 +17,7 @@ require 'pygments'
 				</div>
 			</div>
 		</div>
+		<%= link_to "Edit", edit_post_path%>
 </div>
 <br>
 <div class="row">
@@ -34,9 +35,9 @@ require 'pygments'
 				<div class="panel-body">
 					<%= markdown comment.body %>
 				</div> <!-- panel body -->
-				<% if current_user.id == comment.user_id %>
+				<%# if current_user.id == comment.user_id %>
 				<%= link_to "Delete this comment", destroy_comment_path(id: comment.id), method: :delete %>
-				<% end %>
+				<%# end %>
 			</div> <!-- panel -->
 			<% end -%>
 		<% else %>

@@ -15,8 +15,12 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <form class="navbar-form navbar-left" role="search">
                 <div class="input-group">
-                    <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
-                    <input id="search" class="form-control" name="search" placeholder="Search Here" autocomplete="off" autofocus="autofocus" type="text">
+                    <%= form_tag('/posts', method:"get") do %>
+                        <%= text_field_tag :query, "", id: "search", placeholder: "Search Here", autocomplete: "off", autofocus: "autofocus", type: "text"%>
+                        <%= button_tag(type: 'submit') do %>
+                            <span class="glyphicon glyphicon-search"></span> 
+                        <% end %>
+                    <% end %>
                 </div><!-- input-group -->
             </form>
             <ul class="nav navbar-nav navbar-right">
