@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 				end
 			end
 		else
-			@posts = Post.all.order("id DESC").all
+			@posts = Post.page(params[:page]).per(4).padding(0).all.order("id DESC").all
 		end
 	end
 
@@ -34,18 +34,6 @@ class PostsController < ApplicationController
 	def show
 		@post = Post.find(params[:id])	
 		@comment = Comment.new
-		if params[:commit] == "Next"
-	       post = Post.find(params[:id].to_i + 1)
-	       redirect_to post_path(post)
-	   elsif params[:commit] == "Prev"
-	       post = Post.find(params[:id].to_i - 1)
-	       redirect_to post_path(post)
-	   elsif params[:commit] == "Go"
-        post = Post.find(params[:hero_id])
-        redirect_to post_path(post)
-	    else
-	    	@post = Post.find(params[:id])
-	    end
 	end
 
 	def edit

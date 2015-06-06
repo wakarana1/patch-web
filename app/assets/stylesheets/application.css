@@ -13,7 +13,9 @@
  *= require_tree .
  *= require_self
  */
-
+.hl {
+  color: #ffffff !important;
+}
 .navbar-default {
   background-color: #ffd600;
   border-color: #ffd600;
@@ -75,5 +77,6 @@
 }
 
 .bc {
-  margin: 0 auto;
+  position: relative;
+  left: 600px;
 }

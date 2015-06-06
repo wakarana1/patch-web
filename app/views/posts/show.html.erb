@@ -1,4 +1,4 @@
-require 'pygments'
+
 <h1>Posts.show</h1>
 
 <%= link_to "Return", posts_path, class: "btn-sm btn-danger", style: "margin-left: 15px;" %>
@@ -35,9 +35,9 @@ require 'pygments'
 				<div class="panel-body">
 					<%= markdown comment.body %>
 				</div> <!-- panel body -->
-				<%# if current_user.id == comment.user_id %>
-				<%= link_to "Delete this comment", destroy_comment_path(id: comment.id), method: :delete %>
-				<%# end %>
+				<% if comment.user == current_user %>
+					<%= link_to "Delete this comment", destroy_comment_path(id: comment.id), method: :delete %>
+				<% end %>
 			</div> <!-- panel -->
 			<% end -%>
 		<% else %>

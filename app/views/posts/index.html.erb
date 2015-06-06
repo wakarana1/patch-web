@@ -7,11 +7,11 @@
         <% @posts.each do |post| %>
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3><%= post.title %></h3>
+                    <h3><%= link_to post.title, post, class: 'hl' %></h3>
                     <h6>Posted by: <%= post.user.name %>&nbsp;&nbsp;<small><%= post.updated_at%></small></h6>
                 </div>
                 <div class="panel-body">
-                    <p><%= markdown post.body %></p>
+                    <p><%= markdown truncate(post.body, length: 100, separator: ' ') %></p>
                 </div>
             </div>
                 <div class="panel">
@@ -24,8 +24,7 @@
                         <%= link_to "View#{add} Comments", post_path(id: post.id) %>
                     </span>
                     <span>
-                        <% if current_user == nil %>
-                        <% else post.user_id == current_user.id %>
+                        <% if post.user == current_user %>
                             <%= link_to "Delete this post!", destroy_path(id: post.id), method: :delete %>
                         <% end %>
                     </span>
@@ -39,15 +38,6 @@
     </div>
     <div class="col-md-3"></div>
 </div>
-<div class="row center-block">
-    <div class="col-md-1 col-md-offset-5">
-        <%= form_tag(posts_path, method: "get") do %>
-            <%= submit_tag "Prev", "class" => "btn btn-primary" %>
-    </div>
-    <div class="col-md-1 col-md-offset-1">
-            <%= submit_tag "Next", "class" => "btn btn-primary" %>
-        <% end %>
-    </div>
-</div>
 <br>
+<div class="bc"><%= paginate @posts %></div>
 <br>
