@@ -1,24 +1,21 @@
 development:
-  adapter: postgresql
-  encoding: utf8
-  database: project_development
-  pool: 5
+ adapter: postgresql
+ encoding: utf8
+ database: project_development
+ pool: 5
 
-#test:
-#  <<: *default
-#  database: travis-test_test
 test:
-  adapter: postgresql
-  encoding: utf8
-  database: travis_ci_test
-  username: postgres
-  pool: 5
+ # <<: *default
+ database: travis-test_test
+ adapter: postgresql
+ database: travis_ci_test
+ username: postgres
 
 production:
-  adapter: postgresql
-  encoding: utf8
-  database: project_production
-  pool: 5
+ adapter: postgresql
+ encoding: utf8
+ database: project_production
+ pool: 5
 
-cucumber:
-  <<: *TEST
+# cucumber:
+#  <<: *TEST
