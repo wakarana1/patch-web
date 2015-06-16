@@ -11,15 +11,4 @@ RSpec.describe UsersController, :type => :controller do
    get :new
   	expect(assigns(:user)).to be_a_new(User)
 	end
-
-	it "redirects new user to index" do
-		get :new
-		expect(assigns(:user)).to be_a_new(User)
-		get :index
-		expect(response).to redirect_to(:index)
-	end
-
-	it "doesn't allow invalid user" do
-		#test for invalid user
-	end
 end
