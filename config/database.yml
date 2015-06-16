@@ -9,8 +9,10 @@ development:
 #  database: travis-test_test
 test:
   adapter: postgresql
+  encoding: utf8
   database: travis_ci_test
   username: postgres
+  pool: 5
 
 production:
   adapter: postgresql
