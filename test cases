@@ -1,0 +1,50 @@
+test cases
+
+> Test Cases for UsersController
+
+* Index - It returns the index page √
+* New - It renders the new page		√
+* New - It creates a new user for the form on the new page	√
+* Create - Allows creation of a valid user, redirects correctly	√
+* Create - Doesn't allow invalid user, redirects correctly
+ 
+
+> Test Cases for SessionsController
+
+* New - Should render the new template
+* New - Should assign new user for the login form
+* Create - Should login user with correct user name and password
+* Create - Should not login user with incorrect user name and password
+* Destroy - Should destroy the session when logging a user out 
+* Destroy - Should redirect to users page when logging a user out 
+
+> Test Cases for TargetsController
+
+* Index - Should render index page when user is logged in or 'authorized'
+* Index - Should redirect to Session new page when user is not logged in
+
+> Test Cases for ApplicationController
+
+* Check that authorize does not work when there is no current user
+* Check that authrorize does work when there is a valid user. 
+
+
+USER CONTROLLER TESTS
+
+require 'rails_helper'
+
+RSpec.describe UsersController, :type => :controller do
+  #render_views
+
+  it "should return index view for index method" do
+
+    get :index
+
+    expect(response).to render_template(:index)
+  end
+
+  it "new creates a new user" do
+    get :new
+
+    expect(assigns(:user)).to be_a_new(User)
+  end

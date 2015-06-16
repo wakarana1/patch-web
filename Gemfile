@@ -37,7 +37,23 @@ gem 'kaminari'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+
 gem 'rails_12factor', group: :production
+
+#added in at the end of our Gemfile
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0'
+
+  gem 'shoulda-matchers', require: false
+
+  gem 'capybara'
+
+  gem 'factory_girl_rails'
+
+  #ADD IN simplecov gem
+  gem 'simplecov', :require => false
+end
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
