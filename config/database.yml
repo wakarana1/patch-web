@@ -6,9 +6,8 @@ development:
 
 test:
  # <<: *default
- database: travis-test_test
  adapter: postgresql
- database: travis_ci_test
+ database: project_test
  username: postgres
 
 production:
