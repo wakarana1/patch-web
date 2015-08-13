@@ -1,0 +1,21 @@
+<h1>Names of Lists: </h1>
+
+<% @lists.each do |l| %>
+
+    <div><%= l.name %></div>
+
+<% end %><h2>Name a New List</h2>
+
+<%= form_for @list do |f| %>
+
+
+
+    <div class="field">
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
