@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 				end
 			end
 		else
-			@posts = Post.page(params[:page]).per(4).padding(0).all.order("id DESC").all
+			@posts = Post.all.order("id DESC").all
 		end
 	end
 

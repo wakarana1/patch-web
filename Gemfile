@@ -30,8 +30,6 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'pygments.rb'
 gem 'redcarpet'
 
-# Pagination gem
-gem 'kaminari'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
