@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   delete '/posts/:id', to: 'posts#destroy', as: :destroy
   get '/posts/:id', to: 'posts#show', as: :post
 
+  # posting and deleting comments in posts
   post '/posts/:id/comments', to: 'comments#create', as: :create_comment
   delete '/posts/:id/comments', to: 'comments#destroy', as: :destroy_comment
   # The priority is based upon order of creation: first created -> highest priority.
@@ -27,10 +28,6 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'posts#index', as: :home
-
-  get 'lists/' => 'lists#index', as: :lists
-
-  post 'lists/' => 'lists#create', as: :lists_create
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
